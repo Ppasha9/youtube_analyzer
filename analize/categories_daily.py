@@ -1,4 +1,3 @@
-import pyspark.sql.functions as F
 from pyspark.sql.types import StringType
 from analize.utils import *
 
