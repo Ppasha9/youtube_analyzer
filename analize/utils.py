@@ -12,7 +12,7 @@ def get_session():
 
 def get_categories_dict(spark):
     categories = spark.read.format("mongo") \
-        .option("uri", "mongodb://127.0.0.1/youtube.us_categories") \
+        .option("uri", "mongodb://127.0.0.1/youtube.ru_categories") \
         .load()
     cs = categories.select(["id", "snippet.title"])
     cs_rdd = cs.rdd.map(lambda x: (x.id, x.title)).collect()
@@ -46,9 +46,10 @@ def groupby_apply_describe(df, groupby_col, stat_col):
         F.mean(stat_col).alias("mean"),
         F.stddev(stat_col).alias("std"),
         F.min(stat_col).alias("min"),
-        F.expr(f"percentile({stat_col}, array(0.25))")[0].alias("%25"),
-        F.expr(f"percentile({stat_col}, array(0.5))")[0].alias("%50"),
-        F.expr(f"percentile({stat_col}, array(0.75))")[0].alias("%75"),
+        F.expr(f"percentile({stat_col}, array(0.25))")[0].alias("25%"),
+        F.expr(f"percentile({stat_col}, array(0.5))")[0].alias("50%"),
+        F.expr(f"percentile({stat_col}, array(0.75))")[0].alias("75%"),
+        F.expr(f"percentile({stat_col}, array(0.90))")[0].alias("90%"),
         F.max(stat_col).alias("max"),
     )
     return output
