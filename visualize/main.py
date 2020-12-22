@@ -36,32 +36,32 @@ if __name__ == "__main__":
     # plot_pie_chart(labels, sizes, explode)
 
     # --- BAR CHART ---
-    categories_long_live = youtube_db["categories_long_live"]
-    all_categories_long_live = list(categories_long_live.find({}))
-
-    labels_params = [
-        (elem["category_named"], round(elem["mean"], 2), elem["max"])
-        for elem in all_categories_long_live]
-
-    labels_params.sort(key=lambda elem: elem[1], reverse=True)
-
-    labels_mean = list()
-    sizes_mean = list()
-    for cat_long_live in labels_params:
-        labels_mean.append(cat_long_live[0])
-        sizes_mean.append(cat_long_live[1])
-
-    plot_horiz_bar_chart(labels_mean, sizes_mean, "Среднее количество дней в тренде", 1.5)
-
-    labels_params.sort(key=lambda elem: elem[2], reverse=True)
-
-    labels_max = list()
-    sizes_max = list()
-    for cat_long_live in labels_params:
-        labels_max.append(cat_long_live[0])
-        sizes_max.append(cat_long_live[2])
-
-    plot_horiz_bar_chart(labels_max, sizes_max, "Максимальное количество дней в тренде", 5.5)
+    # categories_long_live = youtube_db["categories_long_live"]
+    # all_categories_long_live = list(categories_long_live.find({}))
+    #
+    # labels_params = [
+    #     (elem["category_named"], round(elem["mean"], 2), elem["max"])
+    #     for elem in all_categories_long_live]
+    #
+    # labels_params.sort(key=lambda elem: elem[1], reverse=True)
+    #
+    # labels_mean = list()
+    # sizes_mean = list()
+    # for cat_long_live in labels_params:
+    #     labels_mean.append(cat_long_live[0])
+    #     sizes_mean.append(cat_long_live[1])
+    #
+    # plot_horiz_bar_chart(labels_mean, sizes_mean, "Среднее количество дней в тренде", 1.5)
+    #
+    # labels_params.sort(key=lambda elem: elem[2], reverse=True)
+    #
+    # labels_max = list()
+    # sizes_max = list()
+    # for cat_long_live in labels_params:
+    #     labels_max.append(cat_long_live[0])
+    #     sizes_max.append(cat_long_live[2])
+    #
+    # plot_horiz_bar_chart(labels_max, sizes_max, "Максимальное количество дней в тренде", 5.5)
 
     # categories_long_live = youtube_db["categories_long_live"]
     # all_categories_long_live = list(categories_long_live.find({}))
@@ -82,46 +82,46 @@ if __name__ == "__main__":
     # plot_long_live_params_chart(labels, params)
 
     # --- VERTICAL BAR CHARTS ---
-    # categories_view_rating = youtube_db["categories_view_rating"]
-    # all_categories_view_rating = list(categories_view_rating.find({}))
-    #
-    # for elem in all_categories_view_rating:
-    #     if elem["category_named"] == "People & Blogs":
-    #         all_categories_view_rating.remove(elem)
-    #         break
-    #
-    # labels_means = [
-    #     (elem["category_named"], elem["ratings_to_views_mean"], elem["likes_to_dislikes_mean"], elem["comments_to_views_mean"])
-    #     for elem in all_categories_view_rating
-    # ]
-    #
-    # labels_means.sort(key=lambda elem: elem[1], reverse=True)
-    # labels_ratings = list()
-    # all_ratings_to_views_mean = list()
-    # for elem in labels_means:
-    #     labels_ratings.append(elem[0])
-    #     all_ratings_to_views_mean.append(elem[1])
-    #
-    # labels_means.sort(key=lambda elem: elem[2], reverse=True)
-    # labels_likes = list()
-    # all_likes_to_dislikes_mean = list()
-    # for elem in labels_means:
-    #     labels_likes.append(elem[0])
-    #     all_likes_to_dislikes_mean.append(elem[2])
-    #
-    # labels_means.sort(key=lambda elem: elem[3], reverse=True)
-    # labels_comments = list()
-    # all_comments_to_views_mean = list()
-    # for elem in labels_means:
-    #     labels_comments.append(elem[0])
-    #     all_comments_to_views_mean.append(elem[3])
+    categories_view_rating = youtube_db["categories_view_rating"]
+    all_categories_view_rating = list(categories_view_rating.find({}))
 
-    # plot_vert_bar_chart(labels_ratings, all_ratings_to_views_mean, "Отношение между оцениванием видео и его просмотров",
-    #                     "Количество оцениваний / количество просмотров")
-    # plot_vert_bar_chart(labels_likes, all_likes_to_dislikes_mean, "Отношение лайков к дизлайкам",
-    #                     "Количество лайков / количество дизлайков")
-    # plot_vert_bar_chart(labels_comments, all_comments_to_views_mean, "Отношение комментируемости видео и его просматриваемости",
-    #                     "Количество комментов / количество просмотр")
+    for elem in all_categories_view_rating:
+        if elem["category_named"] == "People & Blogs":
+            all_categories_view_rating.remove(elem)
+            break
+
+    labels_means = [
+        (elem["category_named"], elem["ratings_to_views_mean"], elem["likes_to_dislikes_mean"], elem["comments_to_views_mean"])
+        for elem in all_categories_view_rating
+    ]
+
+    labels_means.sort(key=lambda elem: elem[1], reverse=True)
+    labels_ratings = list()
+    all_ratings_to_views_mean = list()
+    for elem in labels_means:
+        labels_ratings.append(elem[0])
+        all_ratings_to_views_mean.append(elem[1])
+
+    labels_means.sort(key=lambda elem: elem[2], reverse=True)
+    labels_likes = list()
+    all_likes_to_dislikes_mean = list()
+    for elem in labels_means:
+        labels_likes.append(elem[0])
+        all_likes_to_dislikes_mean.append(elem[2])
+
+    labels_means.sort(key=lambda elem: elem[3], reverse=True)
+    labels_comments = list()
+    all_comments_to_views_mean = list()
+    for elem in labels_means:
+        labels_comments.append(elem[0])
+        all_comments_to_views_mean.append(elem[3])
+
+    plot_vert_bar_chart(labels_ratings, all_ratings_to_views_mean, "Отношение между оцениванием видео и его просмотров",
+                        "Количество оцениваний / количество просмотров")
+    plot_vert_bar_chart(labels_likes, all_likes_to_dislikes_mean, "Отношение лайков к дизлайкам",
+                        "Количество лайков / количество дизлайков")
+    plot_vert_bar_chart(labels_comments, all_comments_to_views_mean, "Отношение комментируемости видео и его просматриваемости",
+                        "Количество комментов / количество просмотр")
 
     # --- TOP CHANNELS ---
     # top_channels = youtube_db["top_channels"]

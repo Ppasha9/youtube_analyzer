@@ -7,14 +7,14 @@ from matplotlib.ticker import MaxNLocator
 def plot_horiz_bar_chart(labels, sizes, xlabel, xmaxlim):
     fig, ax = plt.subplots()
 
+    pos = np.arange(len(labels))
+
     rects = ax.barh(
-        np.arange(len(labels)),
+        pos,
         sizes,
         align="center",
         height=0.5,
-        tick_label=labels,
-        color=["red", "green", "blue", "forestgreen", "turquoise", "chocolate", "gold", "maroon", "navy",
-               "orangered", "pink", "sienna", "violet", "yellowgreen", "indigo"])
+        tick_label=labels)
 
     ax.set_xlim([0, xmaxlim])
     ax.xaxis.set_major_locator(MaxNLocator(24))
@@ -22,6 +22,12 @@ def plot_horiz_bar_chart(labels, sizes, xlabel, xmaxlim):
 
     ax.set_xlabel(xlabel)
 
-    plt.legend(rects, sizes)
+    ax_right = ax.twinx()
+    ax_right.set_yticks(pos)
+    ax_right.set_ylim(ax.get_ylim())
+    ax_right.set_yticklabels(sizes)
+    ax_right.set_ylabel(xlabel)
+
+    # plt.legend(rects, sizes)
 
     plt.show()
